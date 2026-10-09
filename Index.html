@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHT tương tác - Bài 30. Khái quát cơ thể người</title>
+<style>
+:root {
+  --primary:#4f46e5;
+  --secondary:#7c3aed;
+  --blue:#2563eb;
+  --bg:#f6f7ff;
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --ok:#0f9d58;
+  --bad:#d93025;
+  --line:#e5e7eb;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#eef4ff,#f8f5ff);
+  color:var(--text);
+  line-height:1.55;
+}
+.wrapper{width:min(1080px,94%);margin:24px auto 48px}
+.hero{
+  background:linear-gradient(135deg,var(--blue),var(--secondary));
+  color:#fff;border-radius:24px;padding:28px 22px;
+  box-shadow:0 14px 34px rgba(79,70,229,.20);text-align:center
+}
+.hero h1{margin:0;font-size:clamp(26px,4.5vw,42px)}
+.hero p{margin:8px 0 0;font-size:clamp(16px,2.5vw,20px)}
+.student-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;margin-top:20px}
+.student-grid input{width:100%;padding:12px 13px;border:none;border-radius:12px;font-size:16px}
+.card{
+  background:var(--card);margin-top:20px;padding:22px;border-radius:20px;
+  box-shadow:0 8px 24px rgba(30,41,59,.08);border:1px solid #eceefe
+}
+.card h2{margin:0 0 14px;color:var(--primary);font-size:23px}
+.card h3{margin:14px 0 8px;color:#334155}
+.source-box{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.source-box img{width:100%;border-radius:14px;border:1px solid var(--line)}
+.note{background:#eef2ff;border-left:4px solid var(--primary);padding:12px 14px;border-radius:10px}
+.q{
+  background:#fafbff;border:1px solid #e8eaf7;border-radius:14px;
+  padding:15px;margin:14px 0
+}
+.q strong{display:block;margin-bottom:8px;color:#29347a}
+.option{display:block;padding:9px 10px;margin:7px 0;border:1px solid #d9dcef;border-radius:10px;background:#fff;cursor:pointer}
+.option:hover{background:#f4f3ff}
+input[type=radio]{margin-right:8px}
+.feedback{margin-top:8px;font-weight:700}
+.correct{color:var(--ok)} .incorrect{color:var(--bad)}
+.word-bank{background:#f0efff;border-radius:12px;padding:12px;font-weight:700;color:#4c3db8;margin-bottom:12px}
+.blank{padding:7px 9px;border:1.5px solid #a8a2e7;border-radius:8px;font-size:16px;min-width:120px}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.match-item{background:#fafbff;border:1px solid #e6e8f2;border-radius:12px;padding:12px}
+select{width:100%;margin-top:7px;padding:10px;border-radius:9px;border:1px solid #b7b9dc;background:#fff;font-size:15px}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+button{border:none;border-radius:12px;padding:13px 20px;font-size:16px;font-weight:700;cursor:pointer}
+.btn-check{background:linear-gradient(135deg,var(--blue),var(--secondary));color:#fff}
+.btn-reset{background:#eef2ff;color:#4338ca}
+.result{display:none;text-align:center;margin-top:20px;padding:18px;border-radius:14px;background:#eef8f2;border:1px solid #cdebd8}
+.score{font-size:34px;font-weight:800;color:var(--primary)}
+.memory{background:linear-gradient(135deg,#eef4ff,#f8f0ff);border-left:6px solid var(--secondary)}
+ul{padding-left:20px}
+.small{font-size:14px;color:var(--muted)}
+@media(max-width:800px){
+  .student-grid,.source-box,.match-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .wrapper{width:95%;margin-top:12px}
+  .student-grid,.source-box,.match-grid{grid-template-columns:1fr}
+  .card{padding:16px}
+  button{width:100%}
+  .blank{width:100%;margin-top:5px}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <section class="hero">
+    <h1>PHIẾU HỌC TẬP TƯƠNG TÁC</h1>
+    <p><b>Bài 30. Khái quát về cơ thể người</b> – KHTN 8</p>
+    <div class="student-grid">
+      <input type="text" placeholder="Họ và tên">
+      <input type="text" placeholder="Lớp">
+      <input type="text" placeholder="Nhóm">
+      <input type="date">
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🎯 Mục tiêu bài học</h2>
+    <ul>
+      <li>Nêu được các phần khái quát của cơ thể người.</li>
+      <li>Kể tên được các hệ cơ quan chính trong cơ thể người.</li>
+      <li>Xác định được một số cơ quan thuộc từng hệ cơ quan.</li>
+      <li>Nêu được vai trò chính của các hệ cơ quan trong cơ thể.</li>
+    </ul>
+  </section>
+<section class="card">
+    <h2>🧠 Nhiệm vụ 1. Trắc nghiệm</h2>
+
+    <div class="q" data-answer="C">
+      <strong>Câu 1. Cơ thể người gồm những phần chính nào?</strong>
+      <label class="option"><input type="radio" name="q1" value="A">A. Đầu, cổ, ngực và bụng</label>
+      <label class="option"><input type="radio" name="q1" value="B">B. Đầu, thân, hai tay</label>
+      <label class="option"><input type="radio" name="q1" value="C">C. Đầu, cổ, thân, hai tay và hai chân</label>
+      <label class="option"><input type="radio" name="q1" value="D">D. Đầu, cổ, thân và hai chân</label>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="B">
+      <strong>Câu 2. Hệ vận động gồm các cơ quan chính nào?</strong>
+      <label class="option"><input type="radio" name="q2" value="A">A. Tim và mạch máu</label>
+      <label class="option"><input type="radio" name="q2" value="B">B. Cơ, xương, khớp</label>
+      <label class="option"><input type="radio" name="q2" value="C">C. Não, tủy sống, dây thần kinh</label>
+      <label class="option"><input type="radio" name="q2" value="D">D. Phổi, thận, da</label>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="A">
+      <strong>Câu 3. Hệ tuần hoàn có vai trò chính nào sau đây?</strong>
+      <label class="option"><input type="radio" name="q3" value="A">A. Vận chuyển chất dinh dưỡng, oxygen, hormone và chất thải</label>
+      <label class="option"><input type="radio" name="q3" value="B">B. Tiêu hóa thức ăn thành chất dinh dưỡng</label>
+      <label class="option"><input type="radio" name="q3" value="C">C. Tiếp nhận kích thích từ môi trường</label>
+      <label class="option"><input type="radio" name="q3" value="D">D. Duy trì nòi giống</label>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="D">
+      <strong>Câu 4. Cơ quan nào sau đây thuộc hệ bài tiết?</strong>
+      <label class="option"><input type="radio" name="q4" value="A">A. Tim</label>
+      <label class="option"><input type="radio" name="q4" value="B">B. Dạ dày</label>
+      <label class="option"><input type="radio" name="q4" value="C">C. Tủy sống</label>
+      <label class="option"><input type="radio" name="q4" value="D">D. Thận</label>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="C">
+      <strong>Câu 5. Hệ nội tiết điều hòa hoạt động các cơ quan thông qua chất nào?</strong>
+      <label class="option"><input type="radio" name="q5" value="A">A. Enzyme</label>
+      <label class="option"><input type="radio" name="q5" value="B">B. Muối khoáng</label>
+      <label class="option"><input type="radio" name="q5" value="C">C. Hormone</label>
+      <label class="option"><input type="radio" name="q5" value="D">D. Khí oxygen</label>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>✅ Nhiệm vụ 2. Đúng hay sai?</h2>
+
+    <div class="q" data-answer="D">
+      <strong>Câu 6. Toàn bộ cơ thể được bao bọc bên ngoài bởi một lớp da.</strong>
+      <label class="option"><input type="radio" name="q6" value="D">Đúng</label>
+      <label class="option"><input type="radio" name="q6" value="S">Sai</label>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="S">
+      <strong>Câu 7. Hệ hô hấp có chức năng biến đổi thức ăn thành chất dinh dưỡng.</strong>
+      <label class="option"><input type="radio" name="q7" value="D">Đúng</label>
+      <label class="option"><input type="radio" name="q7" value="S">Sai</label>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="D">
+      <strong>Câu 8. Hệ thần kinh thu nhận kích thích, điều khiển và điều hòa hoạt động của các cơ quan.</strong>
+      <label class="option"><input type="radio" name="q8" value="D">Đúng</label>
+      <label class="option"><input type="radio" name="q8" value="S">Sai</label>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="q" data-answer="S">
+      <strong>Câu 9. Hệ sinh dục ở nam và nữ có cấu tạo hoàn toàn giống nhau.</strong>
+      <label class="option"><input type="radio" name="q9" value="D">Đúng</label>
+      <label class="option"><input type="radio" name="q9" value="S">Sai</label>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>✍️ Nhiệm vụ 3. Điền khuyết</h2>
+    <div class="word-bank">Ngân hàng từ khóa: da – mỡ – cơ – xương – tim – mạch máu – phổi – thận</div>
+
+    <div class="q">
+      <p>1. Bên ngoài cơ thể được bao bọc bởi lớp <input class="blank" id="b1" type="text">.</p>
+      <p>2. Dưới da là lớp <input class="blank" id="b2" type="text">.</p>
+      <p>3. Dưới lớp mỡ là <input class="blank" id="b3" type="text"> và <input class="blank" id="b4" type="text">.</p>
+      <p>4. Hệ tuần hoàn gồm <input class="blank" id="b5" type="text"> và <input class="blank" id="b6" type="text">.</p>
+      <p>5. <input class="blank" id="b7" type="text"> là cơ quan quan trọng của hệ hô hấp; <input class="blank" id="b8" type="text"> thuộc hệ bài tiết.</p>
+      <div id="blankFeedback" class="feedback"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🔗 Nhiệm vụ 4. Nối cột</h2>
+    <p>Nối mỗi hệ cơ quan với vai trò chính phù hợp.</p>
+    <div class="match-grid">
+      <div class="match-item">
+        <b>1. Hệ vận động</b>
+        <select id="m1">
+          <option value="">-- Chọn vai trò --</option>
+          <option value="A">A. Duy trì nòi giống</option>
+          <option value="B">B. Định hình cơ thể, bảo vệ nội quan, giúp cử động</option>
+          <option value="C">C. Lọc chất thải có hại ra khỏi máu</option>
+          <option value="D">D. Giúp cơ thể nhận biết các vật và âm thanh</option>
+          <option value="E">E. Lấy oxygen và thải carbon dioxide</option>
+        </select>
+      </div>
+
+      <div class="match-item">
+        <b>2. Hệ hô hấp</b>
+        <select id="m2">
+          <option value="">-- Chọn vai trò --</option>
+          <option value="A">A. Duy trì nòi giống</option>
+          <option value="B">B. Định hình cơ thể, bảo vệ nội quan, giúp cử động</option>
+          <option value="C">C. Lọc chất thải có hại ra khỏi máu</option>
+          <option value="D">D. Giúp cơ thể nhận biết các vật và âm thanh</option>
+          <option value="E">E. Lấy oxygen và thải carbon dioxide</option>
+        </select>
+      </div>
+
+      <div class="match-item">
+        <b>3. Hệ bài tiết</b>
+        <select id="m3">
+          <option value="">-- Chọn vai trò --</option>
+          <option value="A">A. Duy trì nòi giống</option>
+          <option value="B">B. Định hình cơ thể, bảo vệ nội quan, giúp cử động</option>
+          <option value="C">C. Lọc chất thải có hại ra khỏi máu</option>
+          <option value="D">D. Giúp cơ thể nhận biết các vật và âm thanh</option>
+          <option value="E">E. Lấy oxygen và thải carbon dioxide</option>
+        </select>
+      </div>
+
+      <div class="match-item">
+        <b>4. Các giác quan</b>
+        <select id="m4">
+          <option value="">-- Chọn vai trò --</option>
+          <option value="A">A. Duy trì nòi giống</option>
+          <option value="B">B. Định hình cơ thể, bảo vệ nội quan, giúp cử động</option>
+          <option value="C">C. Lọc chất thải có hại ra khỏi máu</option>
+          <option value="D">D. Giúp cơ thể nhận biết các vật và âm thanh</option>
+          <option value="E">E. Lấy oxygen và thải carbon dioxide</option>
+        </select>
+      </div>
+
+      <div class="match-item">
+        <b>5. Hệ sinh dục</b>
+        <select id="m5">
+          <option value="">-- Chọn vai trò --</option>
+          <option value="A">A. Duy trì nòi giống</option>
+          <option value="B">B. Định hình cơ thể, bảo vệ nội quan, giúp cử động</option>
+          <option value="C">C. Lọc chất thải có hại ra khỏi máu</option>
+          <option value="D">D. Giúp cơ thể nhận biết các vật và âm thanh</option>
+          <option value="E">E. Lấy oxygen và thải carbon dioxide</option>
+        </select>
+      </div>
+    </div>
+    <div id="matchFeedback" class="feedback"></div>
+  </section>
+
+  <section class="card memory">
+    <h2>📌 Em cần ghi nhớ</h2>
+    <ul>
+      <li>Cơ thể người gồm: <b>đầu, cổ, thân, hai tay và hai chân</b>.</li>
+      <li>Bên ngoài cơ thể là <b>da</b>; dưới da là <b>lớp mỡ</b>; dưới lớp mỡ là <b>cơ và xương</b>.</li>
+      <li>Cơ thể người có nhiều hệ cơ quan: vận động, tuần hoàn, hô hấp, tiêu hóa, bài tiết, thần kinh, giác quan, nội tiết và sinh dục.</li>
+      <li>Mỗi hệ cơ quan gồm những cơ quan đặc trưng và đảm nhiệm một vai trò chính trong cơ thể.</li>
+      <li>Các hệ cơ quan phối hợp với nhau để duy trì hoạt động sống của cơ thể.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="actions">
+      <button class="btn-check" onclick="checkAll()">✅ KIỂM TRA KẾT QUẢ</button>
+      <button class="btn-reset" onclick="resetAll()">🔄 LÀM LẠI</button>
+    </div>
+    <div class="result" id="result">
+      <div>Điểm của em</div>
+      <div class="score" id="score">0/10</div>
+      <div id="summary"></div>
+    </div>
+  </section>
+</div>
+
+<script>
+function norm(s){
+  return (s||"").toLowerCase().trim()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/đ/g,"d").replace(/\s+/g," ");
+}
+
+function checkAll(){
+  let correct=0, total=0;
+
+  document.querySelectorAll(".q[data-answer]").forEach(q=>{
+    total++;
+    const ans=q.dataset.answer;
+    const chosen=q.querySelector('input[type="radio"]:checked');
+    const fb=q.querySelector(".feedback");
+    if(!chosen){
+      fb.textContent="⚠️ Em chưa chọn đáp án.";
+      fb.className="feedback incorrect";
+    }else if(chosen.value===ans){
+      correct++;
+      fb.textContent="✅ Chính xác!";
+      fb.className="feedback correct";
+    }else{
+      const lab=q.querySelector('input[value="'+ans+'"]').parentElement.textContent.trim();
+      fb.textContent="❌ Chưa chính xác. Đáp án đúng: "+lab;
+      fb.className="feedback incorrect";
+    }
+  });
+
+  const blanks={b1:"da",b2:"mỡ",b3:"cơ",b4:"xương",b5:"tim",b6:"mạch máu",b7:"phổi",b8:"thận"};
+  let bc=0;
+  for(const id in blanks){
+    total++;
+    const el=document.getElementById(id);
+    if(norm(el.value)===norm(blanks[id])){
+      correct++; bc++;
+      el.style.border="2px solid #0f9d58"; el.style.background="#eefbf4";
+    }else{
+      el.style.border="2px solid #d93025"; el.style.background="#fff0f0";
+    }
+  }
+  const bf=document.getElementById("blankFeedback");
+  bf.innerHTML = bc===8 ? "✅ Hoàn thành chính xác toàn bộ phần điền khuyết."
+  : "Em đúng "+bc+"/8 chỗ trống. Đáp án: da – mỡ – cơ – xương – tim – mạch máu – phổi – thận.";
+  bf.className="feedback "+(bc===8?"correct":"incorrect");
+
+  const matches={m1:"B",m2:"E",m3:"C",m4:"D",m5:"A"};
+  let mc=0;
+  for(const id in matches){
+    total++;
+    const el=document.getElementById(id);
+    if(el.value===matches[id]){
+      correct++; mc++;
+      el.style.border="2px solid #0f9d58"; el.style.background="#eefbf4";
+    }else{
+      el.style.border="2px solid #d93025"; el.style.background="#fff0f0";
+    }
+  }
+  const mf=document.getElementById("matchFeedback");
+  mf.innerHTML = mc===5 ? "✅ Em nối đúng toàn bộ."
+  : "Em đúng "+mc+"/5 cặp. Đáp án: 1–B, 2–E, 3–C, 4–D, 5–A.";
+  mf.className="feedback "+(mc===5?"correct":"incorrect");
+
+  const score=Math.round((correct/total*10)*10)/10;
+  document.getElementById("result").style.display="block";
+  document.getElementById("score").textContent=score+"/10";
+
+  let msg="";
+  if(score>=9) msg="🌟 Xuất sắc! Em đã nắm rất chắc kiến thức.";
+  else if(score>=7) msg="👏 Tốt lắm! Em đã hiểu phần lớn nội dung bài.";
+  else if(score>=5) msg="💪 Khá tốt! Hãy xem lại các câu còn sai.";
+  else msg="📚 Em cần ôn lại kiến thức và thử làm lại một lần nữa.";
+  document.getElementById("summary").innerHTML="<b>"+msg+"</b><br>Em làm đúng "+correct+"/"+total+" nội dung.";
+  document.getElementById("result").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function resetAll(){
+  document.querySelectorAll('input[type="radio"]').forEach(x=>x.checked=false);
+  document.querySelectorAll(".feedback").forEach(x=>{x.textContent="";x.className="feedback";});
+  document.querySelectorAll(".blank").forEach(x=>{x.value="";x.style.border="1.5px solid #a8a2e7";x.style.background="#fff";});
+  document.querySelectorAll("select").forEach(x=>{x.selectedIndex=0;x.style.border="1px solid #b7b9dc";x.style.background="#fff";});
+  document.getElementById("result").style.display="none";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+</html>
